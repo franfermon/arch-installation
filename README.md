@@ -34,40 +34,39 @@ You can list the wi-fi devices after iwd is started with:
 
 if the device or adapter is not turned on you should use:
 
-    device *device* set-property Powered on
-    adapter *adapter* set-property Powered on
+> device *device* set-property Powered on
+> adapter *adapter* set-property Powered on
 
 With everything ready you can start scanning the networks around you:
 
-    station *device* scan
+> station *device* scan
 
 And list all of them:
 
-    station *device* get-networks
+> station *device* get-networks
 
 Finally you can connect to a network with the following command:
 
-    station *device* connect *SSID*
+> station *device* connect *SSID*
 
 ## Peparing the hard drive
 
-We will proceed now to create the necessary partitions to install our system:
+We will proceed now to i) create the necessary partitions to install our system ii) format them and iii) mount them. Below you can find a table with all the required parameters.
 
 ### UEFI
-| Partition | type | size |
-| ----------- | ----------- | ----------- |
-| boot | EFI system | 512MiB approx. |
-| root | linux file system | Disk size - boot - swap | 
-| swap (optional) | linux swap | RAM size approx. |
+| Partition | type | size | file system | mount point
+| ----------- | ----------- | ----------- | ----------- | ----------- |
+| boot | EFI system | 512MiB approx. | FAT32 | /mnt/boot |
+| root | linux file system | Disk size - boot - swap | Recommended ext4 or btrfs |/mnt |
+| swap (optional) | linux swap | RAM size approx. | Not applicable | Not applicable |
 
 ### BIOS
-| Partition | type | size |
-| ----------- | ----------- | ----------- |
-| root | linux file system | Disk size - swap | 
-| swap (optional) | linux swap | RAM size approx. |
+| Partition | type | size | file system | mount point
+| ----------- | ----------- | ----------- | ----------- | ----------- |
+| root | linux file system | Disk size - swap | Recommended ext4 or btrfs | /mnt | 
+| swap (optional) | linux swap | RAM size approx. | Not applicable | Not applicable |
 
 we will do so with the following command which will load a guided partition tool
 
      cfdisk
-
 
