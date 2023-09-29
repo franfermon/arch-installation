@@ -11,4 +11,17 @@ The first step that I always do is to change the keyboard layout (in this case t
 
 After that I usually change the font to terminus bold and chage it size accordingly to the DPI of the screen. In the case of the monitor that I currently use I have found the following to be the most adequate:
 
-`setfont ter-128b`
+    setfont ter-128b
+
+## Peparing the hard drive
+
+We will proceed now to create the necessary partitions to install our system:
+
+| UEFI | BIOS |
+| ----------- | ----------- |
+| boot, root, swap optional | root, swap optional |
+
+we will do so with the following command which will load a guided partition tool
+    cfdisk
+
+
