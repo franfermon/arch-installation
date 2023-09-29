@@ -110,20 +110,17 @@ We will start by mounting the root volume into the default mount point (/mnt):
 
 And now if you are in a UEFI system you can mount the EFI system partition with:
 
-> mount --mkdir /dev/*efi_system_partition /mnt/boot
+> mount --mkdir /dev/*efi_system_partition* /mnt/boot
 
 Please note that this is only a suggestion since you can mount this partition into other mount points like the widely used /mnt/boot/efi
 
 We will continue by enabling the swap:
 
-> swapon /dev/*swap_partition
+> swapon /dev/*swap_partition*
 
 ## Minimal installation packages
 
 We will leverage the pacstrap command (remember that we are still "external" to our OS so that's why we cannot use pacman) to create what I consider a minimal installation of arch linux:
 
     pacstrap -K /mnt base base-devel linux linux-firmware networkmanager wpa_supplicant vim grub
-
-
-
 
