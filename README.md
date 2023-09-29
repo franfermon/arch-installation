@@ -7,10 +7,8 @@ Once the terminal is loaded you are executing the installer. Keep in mind that u
 
 The first step that I always do is to change the keyboard layout (in this case to Spanish)
 
-{
-loadkeys es
-}
+'loadkeys es'
 
 After that I usually change the font to terminus bold and chage it size accordingly to the DPI of the screen. In the case of the monitor that I currently use I have found the following to be the most adequate:
 
-{setfont ter-128b} 
+'1setfont ter-128b' 
