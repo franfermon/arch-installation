@@ -53,20 +53,77 @@ Finally you can connect to a network with the following command:
 
 We will proceed now to i) create the necessary partitions to install our system ii) format them and iii) mount them. Below you can find a table with all the required parameters.
 
-### UEFI
-| Partition | type | size | file system | mount point
+### UEFI Partition guide
+| Partition | type | size | file system | mount point |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | boot | EFI system | 512MiB approx. | FAT32 | /mnt/boot |
 | root | linux file system | Disk size - boot - swap | Recommended ext4 or btrfs |/mnt |
 | swap (optional) | linux swap | RAM size approx. | Not applicable | Not applicable |
 
-### BIOS
-| Partition | type | size | file system | mount point
+### BIOS Partition guide
+| Partition | type | size | file system | mount point |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | root | linux file system | Disk size - swap | Recommended ext4 or btrfs | /mnt | 
 | swap (optional) | linux swap | RAM size approx. | Not applicable | Not applicable |
 
-we will do so with the following command which will load a guided partition tool
+### Partitioning the disk
+We will start by loading a guided partition tool:
 
      cfdisk
+
+If you are in UEFI select GPT, in BIOS select DOS.
+
+Then you should find your disk in a /dev/*yourdiskname* format i.e: dev/sda1. Using the UI create the partitions according to the table at the beginning of this section. After that select "Write" and then "Quit".
+
+Let's check that everything is correctly partitioned with this command:
+
+    lsblk -f
+
+### Creating the file systems
+As you will see, there is no file system yet in each of the partitions. We will create them now with the following commands:
+
+**For FAT 32
+
+> mkfs.fat -F 32 /dev/*efi_system_partition*
+
+**For btrfs
+
+> mkfs.btrfs /dev/*root_partition*
+
+**For ext4
+
+> mkfs.ext4 /dev/*root_partition*
+
+**For swap
+
+> mkswap /dev/*swap_partition*
+
+Again, let's check that everything is correctly applied:
+
+    lsblk -f
+
+### Mounting the partitions
+
+We will start by mounting the root volume into the default mount point (/mnt):
+
+> mount /dev/*root_partition* /mnt
+
+And now if you are in a UEFI system you can mount the EFI system partition with:
+
+> mount --mkdir /dev/*efi_system_partition /mnt/boot
+
+Please note that this is only a suggestion since you can mount this partition into other mount points like the widely used /mnt/boot/efi
+
+We will continue by enabling the swap:
+
+> swapon /dev/*swap_partition
+
+## Minimal installation packages
+
+We will leverage the pacstrap command (remember that we are still "external" to our OS so that's why we cannot use pacman) to create what I consider a minimal installation of arch linux:
+
+    pacstrap -K /mnt base base-devel linux linux-firmware networkmanager wpa_supplicant vim grub
+
+
+
 
