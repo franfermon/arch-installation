@@ -118,9 +118,49 @@ We will continue by enabling the swap:
 
 > swapon /dev/*swap_partition*
 
-## Minimal installation packages
+## Minimal installation
 
 We will leverage the pacstrap command (remember that we are still "external" to our OS so that's why we cannot use pacman) to create what I consider a minimal installation of arch linux:
 
     pacstrap -K /mnt base base-devel linux linux-firmware networkmanager wpa_supplicant vim grub
+
+Once the installation finishes we are going to generate the fstab file and place it where it is required in one command:
+
+    genfstab -U /mnt >> /mnt/etc/fstab
+
+## Configuring our new system
+
+We are at last going to enter our new system:
+
+    arch-chroot /mnt
+
+### Localization
+And generate the locales needed by modifiying the file:
+
+  vim  /etc/locale.gen
+
+In here we will uncomment (erase the #) of the locales that we need. In my case en_US.UTF-8 and es_ES.UTF-8, save and exit. After that we will execute the command:
+
+    locale-gen
+
+And now we will define the language of the system by creating the file:
+
+    vim /etc/locale.conf
+
+And adding here our desired language by writing:
+
+    LANG=en_US.UTF-8
+
+Even though the changes to the terminal that we did on our very first step are still present, the moment we reboot this machine both the keymap and the font will go back to its defaults. To prevent this we will first download the terminus font with:
+
+    pacman -S terminus-font
+    
+Then create the file:
+
+    vim /etc/vconsole.conf
+
+and in here we will add our keymap and font of preference. In my case:
+
+    KEYMAP=es
+    FONT=ter-128b
 
