@@ -122,7 +122,7 @@ We will continue by enabling the swap:
 
 We will leverage the pacstrap command (remember that we are still "external" to our OS so that's why we cannot use pacman) to create what I consider a minimal installation of arch linux:
 
-    pacstrap -K /mnt base base-devel linux linux-firmware networkmanager wpa_supplicant vim grub
+    pacstrap -K /mnt base base-devel linux linux-firmware networkmanager wpa_supplicant vim grub sudo
 
 Once the installation finishes we are going to generate the fstab file and place it where it is required in one command:
 
@@ -135,7 +135,7 @@ We are at last going to enter our new system:
     arch-chroot /mnt
 
 ### Localization
-And generate the locales needed by modifiying the file:
+Our first step here is to generate the locales needed by modifiying the file:
 
   vim  /etc/locale.gen
 
@@ -163,4 +163,42 @@ and in here we will add our keymap and font of preference. In my case:
 
     KEYMAP=es
     FONT=ter-128b
+
+### User management
+
+Before we reboot into our new system we will create a hostnane by creating the following file:
+
+    vim /etc/hostname
+
+And writing in here your desired hostname (the name of your machine).
+
+Subsequently we will set the root password with the command
+
+    passwd
+
+And now we will set up our user with the command:
+
+> useradd -m -G wheel *username*
+
+What this will do is not only create the new user but also generate their home folder (with the -m) and add them to the wheel (the usual administrator group) with the -G. We want our user to be able to use sudo so we will go into the file with the following command:
+
+    visudo
+
+In here we will uncomment the line:
+
+    %wheel      ALL=(ALL:ALL) ALL
+
+Exit and save.
+
+Finally, lets generate a password for our new administrator and exit root for safety reasons.
+
+> passwd *username*
+> su *username*
+
+We can check if the account truly has sudo permissions by executing the command:
+
+    sudo whoami
+
+If it returns *root*, the sudo configuration has been successful.
+
 
