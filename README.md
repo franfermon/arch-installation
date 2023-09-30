@@ -82,19 +82,19 @@ Let's check that everything is correctly partitioned with this command:
 ### Creating the file systems
 As you will see, there is no file system yet in each of the partitions. We will create them now with the following commands:
 
-**For FAT 32
+**For FAT 32**
 
 > mkfs.fat -F 32 /dev/*efi_system_partition*
 
-**For btrfs
+**For btrfs**
 
 > mkfs.btrfs /dev/*root_partition*
 
-**For ext4
+**For ext4**
 
 > mkfs.ext4 /dev/*root_partition*
 
-**For swap
+**For swap**
 
 > mkswap /dev/*swap_partition*
 
@@ -200,5 +200,39 @@ We can check if the account truly has sudo permissions by executing the command:
     sudo whoami
 
 If it returns *root*, the sudo configuration has been successful.
+
+## Bootloader setup
+
+As you might have noticed on our minimal installation we have included GRUB. GRUB will be our bootloader of choice and we will configure it now:
+
+### UEFI
+
+> grub-install --target=x86_64-efi --efi-directory=/mnt/boot --bootloader-id=GRUB
+
+>  grub-mkconfig -o /boot/grub/grub.cfg
+
+### BIOS
+
+> grub-install --target=i386-pc */dev/yourdisk*
+
+>  grub-mkconfig -o /boot/grub/grub.cfg
+
+## First boot into Arch Linux
+
+Once we are here we will just type 'exit' until we are back into the root@archiso and from there we will type 'reboot'. Do not forget to extract the installation USB/CD to prevent booting from it.
+
+We will be greeted with a terminal (hopefully with our preferred settings applied) and we will login with our username and password.
+
+You will notice that if you do a ping command we do not have internet. In order to fix this we need to type this commands (the first one will enable the service on every boot and the second one will start it).
+
+    sudo systemctl enable NetworkManager.service
+
+    sudo systemctl start NetworkManager.service
+   
+And lets replicate this step for the wpa_supplicant service
+
+    sudo systemctl enable wpa_supplicant.service
+
+    sudo systemctl start wpa supplicant.service
 
 
