@@ -78,7 +78,7 @@ Then you should find your disk in a /dev/*yourdiskname* format i.e: dev/sda1. Us
 
 Let's check that everything is correctly partitioned with this command:
 
-    lsblk -f
+    lsblk
 
 ### Creating the file systems
 As you will see, there is no file system yet in each of the partitions. We will create them now with the following commands:
@@ -118,6 +118,10 @@ Please note that this is only a suggestion since you can mount this partition in
 We will continue by enabling the swap:
 
 > swapon /dev/*swap_partition*
+
+We can use again the following command to see that every partition is in the correct mount point:
+
+    lsblk
 
 ## Minimal installation
 
