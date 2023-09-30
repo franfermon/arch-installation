@@ -35,6 +35,7 @@ You can list the wi-fi devices after iwd is started with:
 if the device or adapter is not turned on you should use:
 
 > device *device* set-property Powered on
+
 > adapter *adapter* set-property Powered on
 
 With everything ready you can start scanning the networks around you:
@@ -207,15 +208,17 @@ As you might have noticed on our minimal installation we have included GRUB. GRU
 
 ### UEFI
 
-> grub-install --target=x86_64-efi --efi-directory=/mnt/boot --bootloader-id=GRUB
+> sudo pacman -S efibootmgr
 
->  grub-mkconfig -o /boot/grub/grub.cfg
+> grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+
+> grub-mkconfig -o /boot/grub/grub.cfg
 
 ### BIOS
 
 > grub-install --target=i386-pc */dev/yourdisk*
 
->  grub-mkconfig -o /boot/grub/grub.cfg
+> grub-mkconfig -o /boot/grub/grub.cfg
 
 ## First boot into Arch Linux
 
