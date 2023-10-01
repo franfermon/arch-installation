@@ -32,7 +32,7 @@ You can list the wi-fi devices after iwd is started with:
 
     device list
 
-if the device or adapter is not turned on you should use:
+If the device or adapter is not turned on you should use:
 
 > device *device* set-property Powered on
 
@@ -142,7 +142,7 @@ We are at last going to enter our new system:
 ### Localization
 Our first step here is to generate the locales needed by modifiying the file:
 
-  vim  /etc/locale.gen
+    vim /etc/locale.gen
 
 In here we will uncomment (erase the #) of the locales that we need. In my case en_US.UTF-8 and es_ES.UTF-8, save and exit. After that we will execute the command:
 
@@ -195,7 +195,7 @@ In here we will uncomment the line:
 
 Exit and save.
 
-Finally, lets generate a password for our new administrator and exit root for safety reasons.
+Finally, let's generate a password for our new administrator and exit root for safety reasons.
 
 > passwd *username*
 > su *username*
