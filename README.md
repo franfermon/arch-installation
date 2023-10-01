@@ -5,7 +5,7 @@ Let's assume that you have already downloaded and stored an arch linux iso and h
 
 Once the terminal is loaded you are executing the installer. Keep in mind that until we enter our new system everything we are doing is "external". We have a set of tools (like nano or vim, or even fonts like terminus) that are embedded into the installer but are not present in the new installation.
 
-The first step that I always do is to change the keyboard layout (in this case to Spanish)
+The first step that I always do is to change the keyboard layout (in this case to Spanish):
 
     loadkeys es
 
@@ -113,7 +113,7 @@ And now if you are in a UEFI system you can mount the EFI system partition with:
 
 > mount --mkdir /dev/*efi_system_partition* /mnt/boot
 
-Please note that this is only a suggestion since you can mount this partition into other mount points like the widely used /mnt/boot/efi
+Please note that this is only a suggestion since you can mount this partition into other mount points like the widely used /mnt/boot/efi.
 
 We will continue by enabling the swap:
 
@@ -177,7 +177,7 @@ Before we reboot into our new system we will create a hostnane by creating the f
 
 And writing in here your desired hostname (the name of your machine).
 
-Subsequently we will set the root password with the command
+Subsequently we will set the root password with the command:
 
     passwd
 
@@ -198,6 +198,7 @@ Exit and save.
 Finally, let's generate a password for our new administrator and exit root for safety reasons.
 
 > passwd *username*
+
 > su *username*
 
 We can check if the account truly has sudo permissions by executing the command:
@@ -240,6 +241,6 @@ And lets replicate this step for the wpa_supplicant service
 
     sudo systemctl enable wpa_supplicant.service
 
-    sudo systemctl start wpa supplicant.service
+    sudo systemctl start wpa_supplicant.service
 
 
