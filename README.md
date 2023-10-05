@@ -215,15 +215,15 @@ As you might have noticed on our minimal installation we have included GRUB. GRU
 
 > sudo pacman -S efibootmgr
 
-> grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+> sudo grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 
-> grub-mkconfig -o /boot/grub/grub.cfg
+> sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 ### BIOS
 
-> grub-install --target=i386-pc */dev/yourdisk*
+> sudo grub-install --target=i386-pc */dev/yourdisk*
 
-> grub-mkconfig -o /boot/grub/grub.cfg
+> sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 ## First boot into Arch Linux
 
