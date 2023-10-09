@@ -140,7 +140,15 @@ We are at last going to enter our new system:
     arch-chroot /mnt
 
 ### Localization
-Our first step here is to generate the locales needed by modifiying the file:
+Our first step here is set the correct timezone (trust me, it will save you a lot of headaches). You need to find your city in the following command and place it in /etc/localtime:
+
+> ln -sf /usr/share/zoneinfo/*Region*/*City* /etc/localtime
+
+And now we will sync system and hardware clocks:
+
+    hwclock --systohc
+    
+Now we move on to generating the locales needed by modifiying the file:
 
     vim /etc/locale.gen
 
